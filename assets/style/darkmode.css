@@ -1,0 +1,24 @@
+/* darkmode.css */
+body {
+    background-color: #121212;
+    color: white;
+  }
+  
+  header, footer, .sidebar {
+    background-color: #1f1f1f;
+  }
+  
+  button, input {
+    background-color: #333;
+    color: white;
+    border: 1px solid #444;
+  }
+  
+  a {
+    color: #bb86fc;
+  }
+  
+  a:hover {
+    color: #3700b3;
+  }
+  

@@ -1,0 +1,35 @@
+.notfound-container {
+    height: 100vh;
+    background-color: grey;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .notfound-container h1 {
+    font-size: 100px;
+    margin: 0;
+  }
+  
+  .notfound-container p {
+    font-size: 20px;
+    margin: 20px 0;
+  }
+  
+  .notfound-container button {
+    padding: 10px 20px;
+    background-color: blue;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .notfound-container button:hover {
+    background-color: darkblue;
+  }
+  
