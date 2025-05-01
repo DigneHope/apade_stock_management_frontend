@@ -1,4 +1,3 @@
-// src/components/product/ProductList.jsx
 import React, { useEffect, useState } from "react";
 import axiosInstance from "../../api/axios";
 

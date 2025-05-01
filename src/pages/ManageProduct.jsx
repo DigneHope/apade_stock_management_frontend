@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import axios from '../api/productApi';
-import './ManageProducts.css'; // optional if you want extra styles
+import './ManageProducts.css';
 import { toast } from 'react-toastify';
 import TiltCard from '../components/TiltCard';
 

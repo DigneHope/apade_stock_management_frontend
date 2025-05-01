@@ -1,6 +1,5 @@
-// components/product/StockIn.jsx
 import React, { useState } from "react";
-import { addStock } from "../../api/productApi"; // Create this API call function for adding stock
+import { addStock } from "../../api/productApi";
 
 const StockIn = () => {
   const [product, setProduct] = useState("");

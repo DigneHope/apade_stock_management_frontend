@@ -1,4 +1,3 @@
-// components/auth/Logout.jsx
 import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 

@@ -6,15 +6,14 @@ import Loader from '../components/Loader';
 import './ManageUsers.css'; 
 import { motion } from 'framer-motion';
 import TiltCard from '../components/TiltCard';
-//
-//  👈 We'll style it next!
+
 
 function ManageUsers() {
   const [users, setUsers] = useState([]);
   const [newUser, setNewUser] = useState({ username: '', password: '' });
   const [loading, setLoading] = useState(true);
 
-  // Fetch users from backend
+  
   const fetchUsers = async () => {
     try {
       const response = await userApi.getUsers();
@@ -27,15 +26,15 @@ function ManageUsers() {
 
   useEffect(() => {
     fetchUsers();
-    setTimeout(() => setLoading(false), 1000); // fake a loading spinner
+    setTimeout(() => setLoading(false), 1000); 
   }, []);
 
-  // Handle input changes
+ 
   const handleChange = (e) => {
     setNewUser({ ...newUser, [e.target.name]: e.target.value });
   };
 
-  // Add new user
+  
   const handleAddUser = async () => {
     if (!newUser.username || !newUser.password) {
       toast.warning('Please fill all fields');
@@ -52,7 +51,7 @@ function ManageUsers() {
     }
   };
 
-  // Delete user
+  
   const handleDeleteUser = async (id) => {
     if (window.confirm('Are you sure you want to delete this user?')) {
       try {

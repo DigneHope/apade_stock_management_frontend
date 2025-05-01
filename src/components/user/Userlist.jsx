@@ -1,7 +1,5 @@
-// components/userlist/UserList.jsx
 import React, { useEffect, useState } from "react";
-import { getUsers } from "../../api/userApi"; // Assuming you have this function in your user API
-
+import { getUsers } from "../../api/userApi"; 
 const UserList = () => {
   const [users, setUsers] = useState([]);
 

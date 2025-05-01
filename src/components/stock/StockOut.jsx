@@ -1,7 +1,5 @@
-// components/product/StockOut.jsx
 import React, { useState } from "react";
-import { removeStock } from "../../api/productApi"; // Create this API function for removing stock
-
+import { removeStock } from "../../api/productApi"; 
 const StockOut = () => {
   const [product, setProduct] = useState("");
   const [quantity, setQuantity] = useState(0);

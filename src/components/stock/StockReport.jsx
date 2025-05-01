@@ -1,4 +1,3 @@
-// components/stock/StockReport.jsx
 import React, { useEffect, useState } from "react";
 import { getStockReport } from "../../api/stockApi";
 

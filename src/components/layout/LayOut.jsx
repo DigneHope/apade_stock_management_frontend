@@ -1,9 +1,8 @@
-// components/layout/Layout.jsx
 import React from "react";
 import { Link } from "react-router-dom";
-import ParticlesBackground from "../common/ParticlesBackground"; // Background effect component
-import PrivateRoute from "../common/PrivateRoute"; // Private Route Component
-import UserList from "../userlist/UserList"; // UserList Component
+import ParticlesBackground from "../common/ParticlesBackground";
+import PrivateRoute from "../common/PrivateRoute";
+import UserList from "../userlist/UserList"; 
 
 const Layout = () => {
   return (

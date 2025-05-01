@@ -1,4 +1,3 @@
-// src/components/auth/Login.jsx
 import React, { useState } from "react";
 import { login } from "../../api/auth";
 
@@ -9,9 +8,9 @@ const Login = () => {
   const handleLogin = async () => {
     const response = await login(email, password);
     if (response && response.success) {
-      localStorage.setItem("token", response.token); // Store JWT in localStorage
+      localStorage.setItem("token", response.token);
       alert("Login Successful!");
-      window.location.href = "/dashboard"; // redirect to dashboard
+      window.location.href = "/dashboard";
     } else {
       alert("Login Failed!");
     }

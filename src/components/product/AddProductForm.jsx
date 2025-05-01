@@ -1,4 +1,3 @@
-// components/product/AddProductForm.jsx
 import React, { useState } from "react";
 import { addProduct } from "../../api/productApi";
 

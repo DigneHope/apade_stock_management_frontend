@@ -1,6 +1,5 @@
-// components/users/UserForm.jsx
 import React, { useState } from "react";
-import { addUser } from "../../api/userApi"; // Assuming you have this function in your user API file
+import { addUser } from "../../api/userApi";
 
 const UserForm = () => {
   const [userData, setUserData] = useState({
@@ -14,7 +13,7 @@ const UserForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await addUser(userData);  // Call API to add user
+    await addUser(userData);  
   };
 
   return (

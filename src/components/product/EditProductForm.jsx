@@ -1,4 +1,3 @@
-// components/product/EditProductForm.jsx
 import React, { useState } from "react";
 import { updateProduct } from "../../api/productApi";
 

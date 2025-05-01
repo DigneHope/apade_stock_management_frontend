@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './NotFound.css';
-import TiltCard from '../components/TiltCard'; // 👈 We'll create this CSS next!
+import TiltCard from '../components/TiltCard';!
 
 function NotFound() {
   return (

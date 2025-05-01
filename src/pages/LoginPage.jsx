@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Confetti from 'react-confetti';
-// import TiltCard from '../components/TiltCard';
+import TiltCard from '../components/TiltCard';
 import './LoginPage.css';
 
 function LoginPage() {
@@ -26,7 +26,7 @@ function LoginPage() {
 
         setTimeout(() => {
           navigate('/layout');
-        }, 2000); // wait 2 sec for confetti party 🎉
+        }, 2000); 
       } else {
         toast.error('Invalid Email or password');
       }

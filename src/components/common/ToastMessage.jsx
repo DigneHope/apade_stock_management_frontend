@@ -1,4 +1,3 @@
-// components/common/ToastMessage.jsx
 import React from "react";
 
 const ToastMessage = ({ message, type }) => {

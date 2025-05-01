@@ -1,4 +1,3 @@
-// components/auth/Register.jsx
 import React, { useState } from "react";
 import { registerUser } from "../../api/auth";
 import { useHistory } from "react-router-dom";

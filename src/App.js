@@ -1,5 +1,3 @@
-// src/App.jsx
-
 import React, { useContext } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { DarkModeContext } from './context/DarkModeContext';
@@ -18,7 +16,7 @@ import StockIn from './components/stock/StockIn';
 import StockOut from './components/stock/StockOut';
 import ParticlesBackground from './components/common/ParticlesBackground';
 import Spinner from './components/common/Spinner';
-import './assets/styles/darkmode.css'; // Import your dark mode styles
+import './assets/styles/darkmode.css';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
