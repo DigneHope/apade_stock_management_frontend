@@ -19,3 +19,9 @@ export const logout = () => {
   // Remove JWT from local storage or cookies
   localStorage.removeItem("token");
 };
+
+// TODO: registerUser
+export const registerUser = async (userData) => {
+  const response = await axios.post(`${API_URL}/auth/register`, userData);
+  return response.data;
+};

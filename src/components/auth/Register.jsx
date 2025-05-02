@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { registerUser } from "../../api/auth";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [form, setForm] = useState({ username: "", email: "", password: "" });
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -13,15 +13,12 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-<<<<<<< HEAD
       await registerUser(form);
       alert("Registered successfully!");
-      history.push("/login");
+      navigate("/login");
     } catch (err) {
       console.error(err);
       alert("Registration failed!");
-=======
->>>>>>> bb8b21c (new changes)
     }
   };
 

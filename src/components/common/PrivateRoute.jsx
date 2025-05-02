@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Redirect } from "react-router-dom";
+import { Route, Navigate } from "react-router-dom";
 
 const PrivateRoute = ({ children, ...rest }) => {
   const isAuthenticated = !!localStorage.getItem("token");
@@ -11,7 +11,7 @@ const PrivateRoute = ({ children, ...rest }) => {
         isAuthenticated ? (
           children
         ) : (
-          <Redirect to="/login" />
+            <Navigate to="/login" />
         )
       }
     />

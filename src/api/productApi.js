@@ -18,3 +18,18 @@ export const removeStock = async (stockData) => {
   });
   return response.data;
 };
+
+// TODO: addProduct
+export const addProduct = async (productData) => {
+  const response = await axios.post('/api/products', productData);
+  return response.data;
+};
+
+// TODO: updateProduct
+export const updateProduct = async (productId, productData) => {
+  const response = await axios.put(`/products/${productId}`, productData);
+  return response.data;
+};
+
+// TODO: getStockReport
+export const fetchStockReport = () => { }

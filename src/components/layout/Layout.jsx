@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import ParticlesBackground from "../common/ParticlesBackground";
 import PrivateRoute from "../common/PrivateRoute";
-import UserList from "../userlist/UserList"; 
+import UserList from "../user/UserList"; 
 
 const Layout = () => {
   return (

@@ -1,8 +1,6 @@
 import React, { useContext } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { DarkModeContext } from './context/DarkModeContext';
-<<<<<<< HEAD
-import ProtectedRoute from './components/common/ProtectedRoute';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import ProtectedRoute from './components/common/ProtectedRoutes';
 import Layout from './components/layout/Layout';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
@@ -10,75 +8,61 @@ import UserList from './components/user/UserList';
 import ProductList from './components/product/ProductList';
 import AddUserForm from './components/user/AddUserForm';
 import AddProductForm from './components/product/AddProductForm';
-import EditUserForm from './components/user/EditUserForm';
+// import EditUserForm from './components/user/EditUserForm';
 import EditProductForm from './components/product/EditProductForm';
 import StockReport from './components/stock/StockReport';
 import StockIn from './components/stock/StockIn';
 import StockOut from './components/stock/StockOut';
 import ParticlesBackground from './components/common/ParticlesBackground';
 import Spinner from './components/common/Spinner';
-=======
-import ProtectedRoute from './components/common/ProtectedRoutes.jsx';
-import Layout from './components/layout/LayOut.jsx';
-import Login from './components/auth/Login.jsx';
-import Register from './components/auth/Register.jsx';
-import UserList from './components/user/Userlist.jsx';
-import ProductList from './components/product/ProductList.jsx';
-import AddUserForm from './components/user/AddUserForm.jsx';
-import AddProductForm from './components/product/AddProductForm.jsx';
-import EditUserForm from './components/user/EditUserForm.jsx';
-import EditProductForm from './components/product/EditProductForm.jsx';
-import StockReport from './components/stock/StockReport.jsx';
-import StockIn from './components/stock/StockIn.jsx';
-import StockOut from './components/stock/StockOut.jsx';
-import ParticlesBackground from './components/common/ParticlesBackground.jsx';
-import Spinner from './components/common/Spinner.jsx';
->>>>>>> bb8b21c (new changes)
 import './assets/styles/darkmode.css';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { ThemeContext, ThemeProvider } from './context/ThemeContext';
 
 function App() {
-  const { darkMode } = useContext(DarkModeContext);
+  const { darkMode } = useContext(ThemeContext);
 
   return (
-    <div className={darkMode ? 'app dark' : 'app'}>
-      <Router>
-        <ParticlesBackground />
-        <Routes>
-          {/* Public Routes */}
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          
-          {/* Protected Routes */}
-          <Route path="/" element={
-            <ProtectedRoute>
-              <Layout />
-            </ProtectedRoute>
-          }>
-            <Route index element={<UserList />} />
-            <Route path="users" element={<UserList />} />
-            <Route path="users/add" element={<AddUserForm />} />
-            <Route path="users/edit/:id" element={<EditUserForm />} />
-            <Route path="products" element={<ProductList />} />
-            <Route path="products/add" element={<AddProductForm />} />
-            <Route path="products/edit/:id" element={<EditProductForm />} />
-            <Route path="stock-in" element={<StockIn />} />
-            <Route path="stock-out" element={<StockOut />} />
-            <Route path="stock-report" element={<StockReport />} />
-          </Route>
+    <ThemeProvider>
+      <div className={darkMode ? 'app dark' : 'app'}>
+        <Router>
+          <ParticlesBackground />
+          <Routes>
+            {/* Public Routes */}
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
 
-          {/* 404 Page Not Found */}
-          <Route path="*" element={<div className="page-not-found"><h1>404 Not Found 😢</h1></div>} />
-        </Routes>
+            {/* Protected Routes */}
+            <Route path="/" element={
+              <ProtectedRoute>
+                <Layout />
+              </ProtectedRoute>
+            }>
+              <Route index element={<UserList />} />
+              <Route path="users" element={<UserList />} />
+              <Route path="users/add" element={<AddUserForm />} />
+              {/* <Route path="users/edit/:id" element={<EditUserForm />} /> */}
+              <Route path="products" element={<ProductList />} />
+              <Route path="products/add" element={<AddProductForm />} />
+              <Route path="products/edit/:id" element={<EditProductForm />} />
+              <Route path="stock-in" element={<StockIn />} />
+              <Route path="stock-out" element={<StockOut />} />
+              <Route path="stock-report" element={<StockReport />} />
+            </Route>
 
-        {/* Global Toast Container */}
-        <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
-      </Router>
+            {/* 404 Page Not Found */}
+            <Route path="*" element={<div className="page-not-found"><h1>404 Not Found 😢</h1></div>} />
+          </Routes>
 
-      {/* Global Spinner (optional you can control its visibility later) */}
-      <Spinner />
-    </div>
+          {/* Global Toast Container */}
+          <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
+        </Router>
+
+        {/* Global Spinner (optional you can control its visibility later) */}
+        <Spinner />
+      </div>
+    </ThemeProvider>
   );
 }
 

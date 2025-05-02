@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const API_URL = import.meta.env.VITE_API_URL + '/stockApi.php';
+// TODO: double check this url
+const API_URL = `${process.env.REACT_APP_API_URL}/stockApi.php`;
 
 export const stockIn = async (stockData) => {
   const response = await axios.post(API_URL, { action: 'stock_in', ...stockData });

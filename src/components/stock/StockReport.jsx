@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { getStockReport } from "../../api/stockApi";
+import { fetchStockReport } from "../../api/stockApi";
 
 const StockReport = () => {
   const [report, setReport] = useState([]);
 
   useEffect(() => {
     const fetchReport = async () => {
-      const data = await getStockReport();
+      const data = await fetchStockReport();
       setReport(data);
     };
     fetchReport();

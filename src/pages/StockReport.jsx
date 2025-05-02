@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getStockReport } from '../api/stockReportApi';
+import { fetchStockReport } from '../api/stockApi';
 import TiltCard from '../components/TiltCard';
 
 function StockReport() {
@@ -11,7 +11,7 @@ function StockReport() {
 
   const fetchStockReport = async () => {
     try {
-      const res = await getStockReport();
+      const res = await fetchStockReport();
       setReportData(res.data);
     } catch (err) {
       console.error(err);
@@ -35,7 +35,7 @@ function StockReport() {
         </thead>
         <tbody>
           {reportData.length > 0 ? reportData.map((item, index) => (
-            <tr key={index}>
+            <tr key={`report-${index}`}>
               <td>{item.product_name}</td>
               <td>{item.total_stock_in}</td>
               <td>{item.total_stock_out}</td>
