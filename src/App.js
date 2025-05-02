@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { DarkModeContext } from './context/DarkModeContext';
+<<<<<<< HEAD
 import ProtectedRoute from './components/common/ProtectedRoute';
 import Layout from './components/layout/Layout';
 import Login from './components/auth/Login';
@@ -16,6 +17,23 @@ import StockIn from './components/stock/StockIn';
 import StockOut from './components/stock/StockOut';
 import ParticlesBackground from './components/common/ParticlesBackground';
 import Spinner from './components/common/Spinner';
+=======
+import ProtectedRoute from './components/common/ProtectedRoutes.jsx';
+import Layout from './components/layout/LayOut.jsx';
+import Login from './components/auth/Login.jsx';
+import Register from './components/auth/Register.jsx';
+import UserList from './components/user/Userlist.jsx';
+import ProductList from './components/product/ProductList.jsx';
+import AddUserForm from './components/user/AddUserForm.jsx';
+import AddProductForm from './components/product/AddProductForm.jsx';
+import EditUserForm from './components/user/EditUserForm.jsx';
+import EditProductForm from './components/product/EditProductForm.jsx';
+import StockReport from './components/stock/StockReport.jsx';
+import StockIn from './components/stock/StockIn.jsx';
+import StockOut from './components/stock/StockOut.jsx';
+import ParticlesBackground from './components/common/ParticlesBackground.jsx';
+import Spinner from './components/common/Spinner.jsx';
+>>>>>>> bb8b21c (new changes)
 import './assets/styles/darkmode.css';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';

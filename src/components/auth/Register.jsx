@@ -13,12 +13,15 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+<<<<<<< HEAD
       await registerUser(form);
       alert("Registered successfully!");
       history.push("/login");
     } catch (err) {
       console.error(err);
       alert("Registration failed!");
+=======
+>>>>>>> bb8b21c (new changes)
     }
   };
 
