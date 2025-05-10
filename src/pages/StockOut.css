@@ -1,0 +1,126 @@
+.stock-out {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+  }
+  
+  .stock-out.dark {
+    background-color: #333;
+    color: #fff;
+  }
+  
+  .stock-out-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .stock-out-form input,
+  .stock-out-form select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    flex: 1;
+    min-width: 120px;
+  }
+  
+  .stock-out-form input[type="date"] {
+    flex: 0 0 150px;
+  }
+  
+  .stock-out-form button {
+    padding: 8px 16px;
+    background-color: #ff6384;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .stock-out-form button:hover {
+    background-color: #cc4c67;
+  }
+  
+  .stock-out.dark .stock-out-form input,
+  .stock-out.dark .stock-out-form select {
+    background-color: #444;
+    color: #fff;
+    border-color: #555;
+  }
+  
+  .stock-out.dark .stock-out-form button {
+    background-color: #cc4c67;
+  }
+  
+  .stock-out.dark .stock-out-form button:hover {
+    background-color: #a83b52;
+  }
+  
+  .stock-out-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+  
+  .stock-out-table th,
+  .stock-out-table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+  }
+  
+  .stock-out-table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+  }
+  
+  .stock-out-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .stock-out.dark .stock-out-table th,
+  .stock-out.dark .stock-out-table td {
+    border-color: #555;
+  }
+  
+  .stock-out.dark .stock-out-table th {
+    background-color: #444;
+  }
+  
+  .stock-out.dark .stock-out-table tr:nth-child(even) {
+    background-color: #3a3a3a;
+  }
+  
+  .stock-out.dark .stock-out-table {
+    color: #fff;
+  }
+  
+  .error {
+    color: #ff0000;
+    margin: 10px 0;
+  }
+  
+  .stock-out.dark .error {
+    color: #ff6666;
+  }
+  
+  .back-arrow {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+  
+  .arrow-icon {
+    font-size: 24px;
+    color: #007bff;
+  }
+  
+  .stock-out.dark .arrow-icon {
+    color: #66b0ff;
+  }

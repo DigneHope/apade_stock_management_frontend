@@ -15,6 +15,14 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+.fixed-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000; /* Ensure it stays above other content */
+}
+
 .layout-nav ul {
   list-style: none;
   margin: 0;
@@ -58,11 +66,22 @@
 .layout-content {
   flex: 1;
   padding: 20px;
-}.fixed-nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-  
+  margin-top: 60px; /* Adjust for the height of the fixed nav bar */
+}
+
+/* Ensure responsiveness for smaller screens */
+@media (max-width: 768px) {
+  .layout-nav ul {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .layout-nav a,
+  .logout-button {
+    padding: 6px 8px;
+  }
+
+  .layout-content {
+    margin-top: 80px; /* Adjust for potentially taller nav bar on smaller screens */
+  }
 }

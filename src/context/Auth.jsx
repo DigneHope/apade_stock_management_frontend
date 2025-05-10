@@ -20,7 +20,7 @@ export const AuthProvider = ({ children }) => {
   const login = (token) => {
     localStorage.setItem("token", token);
     setIsAuthenticated(true);
-    navigate("/dashboard");  // Navigate to your dashboard after login
+    navigate("/");  // Navigate to your dashboard after login
   };
 
   const logout = () => {

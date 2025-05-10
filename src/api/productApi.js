@@ -21,7 +21,7 @@ export const removeStock = async (stockData) => {
 
 // TODO: addProduct
 export const addProduct = async (productData) => {
-  const response = await axios.post('/api/products', productData);
+  const response = await axios.post('http://localhost/apade_stock_management_backend/product/add_product.php', productData);
   return response.data;
 };
 

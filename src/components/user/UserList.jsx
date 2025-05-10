@@ -16,9 +16,10 @@ const UserList = () => {
   }, []);
 
   return (
-    <div className="user-list-container">
+    <center>
+      <div className="user-list-container">
       <h2>User List</h2>
-      <table>
+      <table border="1">
         <thead>
           <tr>
             <th>Username</th>
@@ -29,7 +30,7 @@ const UserList = () => {
         <tbody>
           {users.map((user) => (
             <tr key={user.id}>
-              <td>{user.username}</td>
+              <td>{user.name}</td>
               <td>{user.email}</td>
               <td>
                 <button>Edit</button>
@@ -40,6 +41,7 @@ const UserList = () => {
         </tbody>
       </table>
     </div>
+    </center>
   );
 };
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axiosInstance from "../../api/axios";
+import axios from "axios";
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
@@ -7,7 +7,8 @@ const ProductList = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axiosInstance.get("/product/get_product.php");
+        const response = await axios.get("http://localhost/apade_stock_management_backend/product/get_product.php");
+        console.log("you reached the page successfully", response);
         setProducts(response.data);
       } catch (error) {
         console.error("Error fetching products:", error);
@@ -18,14 +19,34 @@ const ProductList = () => {
   }, []);
 
   return (
-    <div>
+    <center>
+      <div className="user-list-container">
       <h2>Product List</h2>
-      <ul>
+     <table border="1">
+        <thead>
+          <tr>
+            <th>Productname</th>
+            <th>Price</th>
+            <th>quantity</th>
+            <th>Action</th>
+          </tr>
+          </thead>
+        <tbody>
         {products.map((product) => (
-          <li key={product.id}>{product.name}</li>
+          <tr key={product.id}>
+          <td>{product.name}</td>
+          <td>{product.price}</td>
+          <td>{product.quantity}</td>
+           <td>
+           <button>Edit</button>
+           <button>Delete</button>
+           </td>
+           </tr>
         ))}
-      </ul>
+      </tbody>
+      </table>
     </div>
+    </center>
   );
 };
 

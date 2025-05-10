@@ -1,11 +1,12 @@
 import React from "react";
-import { Route, Navigate } from "react-router-dom";
-
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 const PrivateRoute = ({ children, ...rest }) => {
   const isAuthenticated = !!localStorage.getItem("token");
 
   return (
+    <Routes>
     <Route
+    
       {...rest}
       render={() =>
         isAuthenticated ? (
@@ -15,6 +16,7 @@ const PrivateRoute = ({ children, ...rest }) => {
         )
       }
     />
+    </Routes>
   );
 };
 

@@ -1,67 +1,52 @@
-import React, { useContext } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import ProtectedRoute from './components/common/ProtectedRoutes';
-import Layout from './components/layout/Layout';
+import LayOut from './pages/LayOut';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
-import UserList from './components/user/UserList';
-import ProductList from './components/product/ProductList';
-import AddUserForm from './components/user/AddUserForm';
-import AddProductForm from './components/product/AddProductForm';
-// import EditUserForm from './components/user/EditUserForm';
-import EditProductForm from './components/product/EditProductForm';
-import StockReport from './components/stock/StockReport';
+import ManageUser from './pages/ManageUser';
+import ManageProduct from './pages/ManageProduct';
+import AboutUs from './pages/AboutUs';
 import StockIn from './components/stock/StockIn';
 import StockOut from './components/stock/StockOut';
-import ParticlesBackground from './components/common/ParticlesBackground';
-import Spinner from './components/common/Spinner';
-import './assets/styles/darkmode.css';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { ThemeContext, ThemeProvider } from './context/ThemeContext';
+import { ThemeProvider } from './context/ThemeContext';
+import StockReport from './pages/StockReport';
+import { StockProvider } from './context/StockContext';
 
 function App() {
-  const { darkMode } = useContext(ThemeContext);
-
   return (
     <ThemeProvider>
-      <div className={darkMode ? 'app dark' : 'app'}>
+      <StockProvider>
         <Router>
-          <ParticlesBackground />
           <Routes>
             {/* Public Routes */}
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
 
             {/* Protected Routes */}
-            <Route path="/" element={
-              <ProtectedRoute>
-                <Layout />
-              </ProtectedRoute>
-            }>
-              <Route index element={<UserList />} />
-              <Route path="users" element={<UserList />} />
-              <Route path="users/add" element={<AddUserForm />} />
-              {/* <Route path="users/edit/:id" element={<EditUserForm />} /> */}
-              <Route path="products" element={<ProductList />} />
-              <Route path="products/add" element={<AddProductForm />} />
-              <Route path="products/edit/:id" element={<EditProductForm />} />
+            <Route
+              path="/"
+              element={
+                <ProtectedRoute>
+                  <LayOut />
+                </ProtectedRoute>
+              }
+            >
+              <Route index element={<ManageUser />} />
+              <Route path="users" element={<ManageUser />} />
+              <Route path="products" element={<ManageProduct />} />
               <Route path="stock-in" element={<StockIn />} />
               <Route path="stock-out" element={<StockOut />} />
               <Route path="stock-report" element={<StockReport />} />
+              <Route path="about-us" element={<AboutUs />} />
+              <Route path="logout" element={<Navigate to="/login" replace />} />
             </Route>
 
             {/* 404 Page Not Found */}
-            <Route path="*" element={<div className="page-not-found"><h1>404 Not Found 😢</h1></div>} />
+            <Route path="*" element={<div><h1>404 Not Found</h1></div>} />
           </Routes>
-
-          {/* Global Toast Container */}
-          <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
         </Router>
-
-        {/* Global Spinner (optional you can control its visibility later) */}
-        <Spinner />
-      </div>
+      </StockProvider>
     </ThemeProvider>
   );
 }

@@ -1,109 +1,105 @@
 import React, { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
-import axios from '../api/productApi';
-import './ManageProducts.css';
-import { toast } from 'react-toastify';
-import TiltCard from '../components/TiltCard';
+import './ManageProduct.css';
 
-function ManageProducts() {
+const ManageProduct = () => {
   const [products, setProducts] = useState([]);
-  const [productName, setProductName] = useState('');
+  const [newProduct, setNewProduct] = useState({ name: '' });
+  const [editingId, setEditingId] = useState(null);
+  const [editForm, setEditForm] = useState({ id: '', name: '' });
 
   useEffect(() => {
-    fetchProducts();
+    setProducts([{ id: '1', name: 'Sugar' }]);
   }, []);
 
-  const fetchProducts = async () => {
-    try {
-      const res = await axios.get('/product.php');
-      setProducts(res.data);
-    } catch (err) {
-      console.error(err);
+  const handleAddProduct = (e) => {
+    e.preventDefault();
+    const newProductData = { id: `Example:${products.length + 1}`, name: newProduct.name };
+    setProducts([...products, newProductData]);
+    setNewProduct({ name: '' });
+  };
+
+  const handleDeleteProduct = (id) => {
+    setProducts(products.filter((p) => p.id !== id));
+    if (editingId === id) {
+      setEditingId(null);
+      setEditForm({ id: '', name: '' });
     }
   };
 
-  const handleAddProduct = async () => {
-    if (!productName.trim()) {
-      toast.error('Product name cannot be empty!');
-      return;
-    }
-    try {
-      const res = await axios.post('/product.php', { product_name: productName });
-      if (res.data.success) {
-        toast.success('Product added!');
-        setProductName('');
-        fetchProducts();
-      } else {
-        toast.error('Failed to add product!');
-      }
-    } catch (err) {
-      console.error(err);
-      toast.error('Error adding product!');
-    }
+
+
+  const handleSaveEdit = (e) => {
+    e.preventDefault();
+    setProducts(products.map((product) => (product.id === editForm.id ? { ...product, name: editForm.name } : product)));
+    setEditingId(null);
+    setEditForm({ id: '', name: '' });
   };
 
-  const handleDeleteProduct = async (id) => {
-    try {
-      const res = await axios.delete(`/product.php?id=${id}`);
-      if (res.data.success) {
-        toast.success('Product deleted!');
-        fetchProducts();
-      } else {
-        toast.error('Failed to delete product!');
-      }
-    } catch (err) {
-      console.error(err);
-      toast.error('Error deleting product!');
-    }
+  const handleCancelEdit = () => {
+    setEditingId(null);
+    setEditForm({ id: '', name: '' });
   };
 
   return (
-    <motion.div
-      className="page"
-      initial={{ opacity: 0, x: 100 }}
-      animate={{ opacity: 1, x: 0 }}
-      exit={{ opacity: 0, x: -100 }}
-      transition={{ duration: 0.5 }}
-    >
-      <h2>Manage Products</h2>
-      <div className="form-section">
-        <input
-          type="text"
-          placeholder="Enter product name"
-          value={productName}
-          onChange={(e) => setProductName(e.target.value)}
-        />
-        <button onClick={handleAddProduct}>Add Product</button>
+    <div className="manage-products">
+      <h2>Product management</h2>
+      <div className="add-product-form">
+        <h3>Add new product</h3>
+        <form onSubmit={handleAddProduct}>
+          <input
+            type="text"
+            placeholder="Product Name"
+            value={newProduct.name}
+            onChange={(e) => setNewProduct({ ...newProduct, name: e.target.value })}
+            required
+          />
+          <button type="submit">Add Product</button>
+        </form>
       </div>
-
       <table>
         <thead>
           <tr>
             <th>ID</th>
             <th>Product Name</th>
-            <th>Actions</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
-          {products.length > 0 ? (
-            products.map((product) => (
-              <tr key={product.product_id}>
-                <td>{product.product_id}</td>
-                <td>{product.product_name}</td>
-                <td>
-                  <button onClick={() => handleDeleteProduct(product.product_id)}>Delete</button>
-                </td>
-              </tr>
-            ))
-          ) : (
-            <tr>
-              <td colSpan="3">No products found!</td>
+          {products.map((product) => (
+            <tr key={product.id}>
+              <td>{product.id}</td>
+              <td>
+                {editingId === product.id ? (
+                  <input
+                    type="text"
+                    name="name"
+                    value={editForm.name}
+                    onChange={handleEditChange}
+                    required
+                  />
+                ) : (
+                  product.name
+                )}
+              </td>
+              <td>
+                {editingId === product.id ? (
+                  <>
+                    <button onClick={handleSaveEdit}>Save</button>
+                    <button onClick={handleCancelEdit}>Cancel</button>
+                  </>
+                ) : (
+                  <>
+                    <button onClick={() => handleEditClick(product)}>Edit</button>
+                    <button onClick={() => handleDeleteProduct(product.id)}>delete</button>
+                  </>
+                )}
+              </td>
             </tr>
-          )}
+          ))}
         </tbody>
       </table>
-    </motion.div>
+    </div>
   );
-}
+};
 
-export default ManageProducts;
+export default ManageProduct;

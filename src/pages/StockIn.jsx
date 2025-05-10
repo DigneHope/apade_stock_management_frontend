@@ -1,130 +1,56 @@
-import React, { useEffect, useState } from 'react';
-import { getStockIn, addStockIn, deleteStockIn } from '../api/stockInApi';
-import { getProducts } from '../api/productApi';
-import TiltCard from '../components/TiltCard';
+import React, { useState } from "react";
+import { useStock } from "../../context/StockContext";
+import './StockIn.css';
 
-function StockIn() {
-  const [stockInList, setStockInList] = useState([]);
-  const [products, setProducts] = useState([]);
-  const [selectedProduct, setSelectedProduct] = useState('');
-  const [quantity, setQuantity] = useState('');
+const StockIn = () => {
+  const { addStockIn } = useStock();
+  const [product, setProduct] = useState("");
+  const [quantity, setQuantity] = useState("");
 
-  useEffect(() => {
-    fetchStockIn();
-    fetchProducts();
-  }, []);
-
-  const fetchStockIn = async () => {
-    try {
-      const res = await getStockIn();
-      setStockInList(res.data);
-    } catch (err) {
-      console.error(err);
-      alert('Failed to fetch stock in data');
-    }
-  };
-
-  const fetchProducts = async () => {
-    try {
-      const res = await getProducts();
-      setProducts(res.data);
-    } catch (err) {
-      console.error(err);
-      alert('Failed to fetch products');
-    }
-  };
-
-  const handleAddStockIn = async (e) => {
+  const handleStockIn = (e) => {
     e.preventDefault();
-    if (!selectedProduct || !quantity) {
-      alert('Please select a product and enter quantity');
-      return;
-    }
-    try {
-      await addStockIn({ product_id: selectedProduct, quantity });
-      alert('Stock added successfully!');
-      setSelectedProduct('');
-      setQuantity('');
-      fetchStockIn();
-    } catch (err) {
-      console.error(err);
-      alert('Failed to add stock');
-    }
-  };
-
-  const handleDeleteStockIn = async (id) => {
-    if (window.confirm('Are you sure you want to delete this stock entry?')) {
-      try {
-        await deleteStockIn(id);
-        alert('Stock in record deleted!');
-        fetchStockIn();
-      } catch (err) {
-        console.error(err);
-        alert('Failed to delete stock');
-      }
+    if (product.trim() && quantity > 0) {
+      const newEntry = {
+        product: product.trim(),
+        quantity: parseInt(quantity),
+        date: new Date().toISOString().split('T')[0],
+      };
+      addStockIn(newEntry);
+      alert("Stock added successfully!");
+      setProduct("");
+      setQuantity("");
+    } else {
+      alert("Please enter a valid product name and a positive quantity.");
     }
   };
 
   return (
-    <AnimatedPage>
-    <div style={{ padding: '20px' }}>
-      <h2>Stock In</h2>
-
-      {/* Form to add stock in */}
-      <form onSubmit={handleAddStockIn} style={{ marginBottom: '20px' }}>
-        <select
-          value={selectedProduct}
-          onChange={e => setSelectedProduct(e.target.value)}
-          style={{ marginRight: '10px' }}
-        >
-          <option value="">Select Product</option>
-          {products.map(product => (
-            <option key={product.product_id} value={product.product_id}>
-              {product.product_name}
-            </option>
-          ))}
-        </select>
-
-        <input
-          type="number"
-          placeholder="Quantity"
-          value={quantity}
-          onChange={e => setQuantity(e.target.value)}
-          style={{ marginRight: '10px' }}
-        />
-        <button type="submit">Add Stock</button>
-      </form>
-
-      {/* Table of stock in */}
-      <table border="1" cellPadding="10" cellSpacing="0">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Product ID</th>
-            <th>Quantity</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {stockInList.length > 0 ? stockInList.map(item => (
-            <tr key={item.id}>
-              <td>{item.id}</td>
-              <td>{item.product_id}</td>
-              <td>{item.quantity}</td>
-              <td>
-                <button onClick={() => handleDeleteStockIn(item.id)}>Delete</button>
-              </td>
-            </tr>
-          )) : (
-            <tr>
-              <td colSpan="4">No stock in records found.</td>
-            </tr>
-          )}
-        </tbody>
-      </table>
+    <div className="stock-in-page">
+      <div className="stock-in-container">
+        <h2>Add Stock</h2>
+        <form onSubmit={handleStockIn}>
+          <label>Product Name</label>
+          <input
+            type="text"
+            value={product}
+            onChange={(e) => setProduct(e.target.value)}
+            placeholder="Enter product name"
+            required
+          />
+          <label>Quantity</label>
+          <input
+            type="number"
+            value={quantity}
+            onChange={(e) => setQuantity(e.target.value)}
+            placeholder="Enter quantity"
+            min="1"
+            required
+          />
+          <button type="submit">Add Stock</button>
+        </form>
+      </div>
     </div>
-     </AnimatedPage>
   );
-}
+};
 
 export default StockIn;

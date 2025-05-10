@@ -4,7 +4,7 @@ const API_URL = process.env.REACT_APP_API_URL;
 
 export const login = async (email, password) => {
   try {
-    const response = await axios.post(`${API_URL}/auth/login.php`, {
+    const response = await axios.post(`http://localhost/apade_stock_management_backend/public/api/login`, {
       email,
       password,
     });

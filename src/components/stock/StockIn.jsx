@@ -1,23 +1,26 @@
 import React, { useState } from "react";
-import { addStock } from "../../api/productApi";
+import { useStock } from "../../context/StockContext";
+import './StockIn.css';
 
 const StockIn = () => {
+  const { addStockIn } = useStock();
   const [product, setProduct] = useState("");
-  const [quantity, setQuantity] = useState(0);
-  const [price, setPrice] = useState(0);
+  const [quantity, setQuantity] = useState("");
 
-  const handleStockIn = async (e) => {
+  const handleStockIn = (e) => {
     e.preventDefault();
-    try {
-      const response = await addStock({ product, quantity, price });
-      if (response.success) {
-        alert("Stock added successfully!");
-      } else {
-        alert("Failed to add stock.");
-      }
-    } catch (error) {
-      console.error("Error adding stock:", error);
-      alert("An error occurred. Please try again.");
+    if (product && quantity > 0) {
+      const newEntry = {
+        product,
+        quantity: parseInt(quantity),
+        date: new Date().toISOString().split('T')[0],
+      };
+      addStockIn(newEntry);
+      alert("Stock added successfully!");
+      setProduct("");
+      setQuantity("");
+    } else {
+      alert("Please enter a valid product name and quantity.");
     }
   };
 
@@ -30,6 +33,7 @@ const StockIn = () => {
           type="text"
           value={product}
           onChange={(e) => setProduct(e.target.value)}
+          placeholder="Enter product name"
           required
         />
         <label>Quantity</label>
@@ -37,13 +41,8 @@ const StockIn = () => {
           type="number"
           value={quantity}
           onChange={(e) => setQuantity(e.target.value)}
-          required
-        />
-        <label>Price</label>
-        <input
-          type="number"
-          value={price}
-          onChange={(e) => setPrice(e.target.value)}
+          placeholder="Enter quantity"
+          min="1"
           required
         />
         <button type="submit">Add Stock</button>

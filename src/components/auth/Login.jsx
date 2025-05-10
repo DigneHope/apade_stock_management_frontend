@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { login } from "../../api/auth";
-
+import './Login.css'
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -10,14 +10,14 @@ const Login = () => {
     if (response && response.success) {
       localStorage.setItem("token", response.token);
       alert("Login Successful!");
-      window.location.href = "/dashboard";
+      window.location.href = "/";
     } else {
       alert("Login Failed!");
     }
   };
 
   return (
-    <div>
+    <div className="loginpage">
       <h2>Login</h2>
       <input
         type="email"

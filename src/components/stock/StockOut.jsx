@@ -1,21 +1,26 @@
 import React, { useState } from "react";
-import { removeStock } from "../../api/productApi"; 
-const StockOut = () => {
-  const [product, setProduct] = useState("");
-  const [quantity, setQuantity] = useState(0);
+import { useStock } from "../../context/StockContext";
+import './StockOut.css';
 
-  const handleStockOut = async (e) => {
+const StockOut = () => {
+  const { addStockOut } = useStock();
+  const [product, setProduct] = useState("");
+  const [quantity, setQuantity] = useState("");
+
+  const handleStockOut = (e) => {
     e.preventDefault();
-    try {
-      const response = await removeStock({ product, quantity });
-      if (response.success) {
-        alert("Stock removed successfully!");
-      } else {
-        alert("Failed to remove stock.");
-      }
-    } catch (error) {
-      console.error("Error removing stock:", error);
-      alert("An error occurred. Please try again.");
+    if (product.trim() && quantity > 0) {
+      const newEntry = {
+        product: product.trim(),
+        quantity: parseInt(quantity),
+        date: new Date().toISOString().split('T')[0],
+      };
+      addStockOut(newEntry);
+      alert("Stock removed successfully!");
+      setProduct("");
+      setQuantity("");
+    } else {
+      alert("Please enter a valid product name and a positive quantity.");
     }
   };
 
@@ -28,6 +33,7 @@ const StockOut = () => {
           type="text"
           value={product}
           onChange={(e) => setProduct(e.target.value)}
+          placeholder="Enter product name"
           required
         />
         <label>Quantity</label>
@@ -35,6 +41,8 @@ const StockOut = () => {
           type="number"
           value={quantity}
           onChange={(e) => setQuantity(e.target.value)}
+          placeholder="Enter quantity"
+          min="1"
           required
         />
         <button type="submit">Remove Stock</button>
